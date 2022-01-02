@@ -13,15 +13,15 @@
         <div class="chat-widget">
           <div class="chat-section">
             <span v-for="a in data" :key="a.chat">
-              <span class="short-date">{{timestamp_to_date(a.timestamp)}}</span>
-              <a class="user">{{a.name}}</a>
-              <span class="message">: {{a.chat}}</span>
+              <span class="short-date">{{timestamp_to_date(a)}}</span>
+              <a class="user">{{a.name}}: </a>
+              <span class="message">{{a.chat}}</span>
               <br/>
             </span>
           </div>
         </div>
         <div class="chat-input-wrapper">
-          
+          <!-- <span v-for="b in orderedUsers" :key="b.timestamp">{{b.timestamp}}</span> -->
         </div>
       </div>
     </div>
@@ -52,22 +52,32 @@ export default {
   },
   methods: {
     timestamp_to_date(news){
-      var date = new Date(news.timestamp * 1000 - 60 * 60 * 9 * 1000);
-      var hour = this.correction_date(date.getHours());
-      var min = this.correction_date(date.getMinutes());
-      return '${hour}:${min}'
+      var date = new Date(news.timestamp * 1000 - 60 * 60 * 9 * 1000)
+      var hour = this.correction_date(date.getHours())
+      var min = this.correction_date(date.getMinutes())
+      return `${hour}:${min}`
     },
     correction_date(i){
       return i >= 10 ? i : '0' + i
+    },
+    sort_date(i){
+
     }
-  }
+  },
+  // computed:{
+  //   orderedUsers : function(){
+  //       return _.orderBy(this.data, 'timestamp', 'asc');
+  //   }
+  // }
+
+
 }
 </script>
 <style>
 .chat-container{
     position:absolute;
     height: 329px; 
-    width:200px;
+    width:300px;
     background: #eaecef;
     bottom:0px;
     right: 50%;
