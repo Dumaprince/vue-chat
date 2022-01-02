@@ -10,16 +10,17 @@
       </header>
 
       <div class="body">
-        <div class="chatWidget">
-          <div class="chatSection">
-            <span v-for="(a,i) in data" :key="i">
-              <a class="user">{{data[i].name}}</a>
-              <span class="message">: {{data[i].chat}}</span>
+        <div class="chat-widget">
+          <div class="chat-section">
+            <span v-for="a in data" :key="a.chat">
+              <span class="short-date">{{timestamp_to_date(a.timestamp)}}</span>
+              <a class="user">{{a.name}}</a>
+              <span class="message">: {{a.chat}}</span>
               <br/>
             </span>
           </div>
         </div>
-        <div class="chatInputWrapper">
+        <div class="chat-input-wrapper">
           
         </div>
       </div>
@@ -43,10 +44,21 @@ export default {
           },
           {
               'name':'Minsu',
-              'chat':'응애 나도 나애기개발자',
+              'chat':'응애 나는 정자개발자',
               'timestamp':1641139601
           },
       ]
+    }
+  },
+  methods: {
+    timestamp_to_date(news){
+      var date = new Date(news.timestamp * 1000 - 60 * 60 * 9 * 1000);
+      var hour = this.correction_date(date.getHours());
+      var min = this.correction_date(date.getMinutes());
+      return '${hour}:${min}'
+    },
+    correction_date(i){
+      return i >= 10 ? i : '0' + i
     }
   }
 }
