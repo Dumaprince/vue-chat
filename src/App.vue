@@ -2,16 +2,17 @@
   <div id="app">
     <img src="./assets/logo.png">
     <HelloWorld/>
+    <Chat/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld'
-
+import Chat from './components/Chat.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld, Chat
   }
 }
 </script>
