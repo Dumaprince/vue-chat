@@ -4,8 +4,8 @@
       <input 
         type="text"
         @input="$emit('input', $event.target.value)"
+        @keyup.enter="$emit('closeModal')"
       >
-      <button @click="$emit('closeModal')">Submit</button>
     </div>
   </div>
 </template>
