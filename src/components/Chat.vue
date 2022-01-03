@@ -1,41 +1,44 @@
 <template>
-    <div class="chat-container">
-      <header>
-        <span class="title">
-          <div>Trollbox ({{data.length}})</div>
-        </span>
-        <span>
-          <a href="#">설정</a>
-        </span>
-      </header>
-      <div class="body">
-        <div class="chat-widget">
-          <div class="chat-section">
-            <span v-for="a in data" :key="a.chat">
-              <span class="short-date" v-if="isNaN(a.timestamp) == true">{{a.timestamp}}</span>
-              <span class="short-date" v-if="isNaN(a.timestamp) == false">{{timestamp_to_date(a.timestamp)}}</span>
-              <a class="user">{{a.name}}: </a>
-              <span class="message">{{a.chat}}</span>
-              <br/>
-            </span>
-          </div>
-        </div>
-        <div class="chat-input-wrapper">
-          <textarea v-model="inputText" class="chatInput form-control"></textarea>
-          <div @click="push_data()" class="submit-progress">전송</div>
+  <div class="chat-container">
+    <header>
+      <Modal @closeModal="modal = false" v-model="inputName" :modal="modal" :inputName="inputName"/>
+      <span class="title">
+        <div>Trollbox ({{data.length}})</div>
+      </span>
+      <span>
+        <a href="#">설정</a>
+      </span>
+    </header>
+    <div class="body">
+      <div class="chat-widget">
+        <div class="chat-section">
+          <span v-for="a in data" :key="a.chat">
+            <span class="short-date" v-if="isNaN(a.timestamp) == true">{{a.timestamp}}</span>
+            <span class="short-date" v-if="isNaN(a.timestamp) == false">{{timestamp_to_date(a.timestamp)}}</span>
+            <a class="user">{{a.name}}: </a>
+            <span class="message">{{a.chat}}</span>
+            <br/>
+          </span>
         </div>
       </div>
+      <div class="chat-input-wrapper">
+        <textarea v-model="inputText" class="chatInput form-control"></textarea>
+        <div @click="push_data()" class="submit-progress">전송</div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
+import Modal from './Modal.vue'
 export default {
-  // 무한루프 걸립니다 선생님
-  // watch: {
-  //   data(a){
-  //     this.sort_date()
-  //   },
-  //   immediate: true // 컴포넌트가 생성되자마자 즉시 실행
-  // },
+  components: { Modal },
+  watch: {
+    immediate: true,
+    handler(newValue, oldValue){
+      if(newValue == oldValue) return
+      this.sort_date()
+    }
+  },
 
   methods: {
     timestamp_to_date(news){
@@ -53,7 +56,7 @@ export default {
     push_data(){
       var inputDate = (Date.now() /1000 | 0)
       var pushData = {
-        'name' : 'test',
+        'name' : this.inputName,
         'chat' : this.inputText,
         'timestamp' : this.timestamp_to_date(inputDate)
       }
@@ -65,6 +68,8 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      modal: true,
+      inputName: '',
       inputText: '',
       data:[
           {
@@ -96,5 +101,17 @@ export default {
     background: #eaecef;
     bottom:0px;
     right: 50%;
+}
+
+.black-bg{
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  position: fixed; padding: 20px;
+}
+
+.white-bg{
+  width: 100%; background: white;
+  border-radius:8px;
+  padding: 20px;
 }
 </style>
