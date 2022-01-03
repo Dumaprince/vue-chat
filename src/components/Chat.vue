@@ -1,7 +1,7 @@
 <template>
   <div class="chat-container">
     <header>
-      <Modal @closeModal="modal = false" v-model="inputName" :modal="modal" :inputName="inputName"/>
+      <Modal @close-modal="modal = false" v-model="inputName" :modal="modal" :inputName="inputName"/>
       <span class="title">
         <div>Trollbox ({{data.length}})</div>
       </span>
@@ -13,8 +13,8 @@
       <div class="chat-widget">
         <div class="chat-section">
           <span v-for="a in data" :key="a.chat">
-            <span class="short-date" v-if="isNaN(a.timestamp) == true">{{a.timestamp}}</span>
-            <span class="short-date" v-if="isNaN(a.timestamp) == false">{{timestamp_to_date(a.timestamp)}}</span>
+            <span class="short-date" v-if="isNaN(a.timestamp)">{{a.timestamp}}</span>
+            <span class="short-date" v-else>{{timestamp_to_date(a.timestamp)}}</span>
             <a class="user">{{a.name}}: </a>
             <span class="message">{{a.chat}}</span>
             <br/>
