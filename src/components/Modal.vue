@@ -3,7 +3,6 @@
     <div class="white-bg">
       <input 
         type="text"
-        :value ="value"
         @input="$emit('input', $event.target.value)"
       >
       <button @click="$emit('closeModal')">Submit</button>
@@ -16,10 +15,7 @@ export default {
   name: 'Modal',
   props : {
     modal : Boolean,
-    value:{
-      inputName : String,
-      required: true
-    }
+    inputName : String,
   }
 }
 </script>
