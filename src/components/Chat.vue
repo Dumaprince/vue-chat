@@ -2,13 +2,12 @@
     <div class="chat-container">
       <header>
         <span class="title">
-          <div>Trollbox (접속자 수)</div>
+          <div>Trollbox ({{data.length}})</div>
         </span>
         <span>
           <a href="#">설정</a>
         </span>
       </header>
-
       <div class="body">
         <div class="chat-widget">
           <div class="chat-section">
@@ -21,7 +20,8 @@
           </div>
         </div>
         <div class="chat-input-wrapper">
-          <!-- <span v-for="b in orderedUsers" :key="b.timestamp">{{b.timestamp}}</span> -->
+          <textarea v-model="inputText" class="chatInput form-control"></textarea>
+          <div @click="push_data()" class="submit-progress">전송</div>
         </div>
       </div>
     </div>
@@ -31,6 +31,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      inputText: '',
       data:[
           {
               'name':'Duma',
@@ -45,7 +46,7 @@ export default {
           {
               'name':'Minsu',
               'chat':'응애 나는 정자개발자',
-              'timestamp':1641139601
+              'timestamp':1641120601
           },
       ]
     }
@@ -60,16 +61,22 @@ export default {
     correction_date(i){
       return i >= 10 ? i : '0' + i
     },
-    sort_date(i){
-
-    }
+    sort_date(){
+      this.data.sort( (a,b) => parseFloat(a.timestamp) - parseFloat(b.timestamp ) )
+    },
+    // 이곳 포맷 하고 넣어야되는지 .... 56줄 계산해보니까 now 자릿수랑 똑같아서 의문임 그리고 되지도 않음ㅅㅂㅅㅂ
+    // push_data(){
+    //   // alert(this.inputText);
+    //   var inputDate = Date.now();
+    //   var hour = this.correction_date(inputDate.getHours())
+    //   var min = this.correction_date(inputDate.getMinutes())
+    //   alert(`${hour}:${min}`)
+    // }
   },
-  // computed:{
-  //   orderedUsers : function(){
-  //       return _.orderBy(this.data, 'timestamp', 'asc');
-  //   }
-  // }
-
+  // error - 라이프사이클 훅 의문.. 처음 랜더링 될때 데이터 정리하고 보여주려고 하는데 안됨 ㅠ
+  beforeMount(){
+    sort_date();
+  },
 
 }
 </script>
