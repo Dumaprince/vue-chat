@@ -1,9 +1,9 @@
 <template>
   <div class="chat-container">
+    <Modal @close-modal="modal = false" v-model="inputName" :modal="modal" :inputName="inputName"/>
     <header>
-      <Modal @close-modal="modal = false" v-model="inputName" :modal="modal" :inputName="inputName"/>
       <span class="title">
-        <div>Trollbox ({{Array.from(new Set(data.name))}})</div>
+        <div>Trollbox ({{data.length}})</div>
       </span>
       <span>
         <a href="#">설정</a>
@@ -60,7 +60,8 @@ export default {
         'chat' : this.inputText,
         'timestamp' : this.timestamp_to_date(inputDate)
       }
-      this.data.push(pushData);
+      this.data.push(pushData)
+      this.inputText = ''
     }
   },
 
@@ -98,24 +99,22 @@ export default {
     height: 329px; 
     width:300px;
     background: #eaecef;
-    bottom:0px;
+    bottom:50px;
+    left: 50px;
     right: 50%;
 }
 
 .black-bg{
-  position: fixed;
-  top:0; left: 0; bottom: 0; right: 0;
-  background: rgba(0, 0, 0, 0.8);
+  display:block;
+  width: 100%;
+  height:100%;
+  background: rgba(235, 235, 235, 0.8);
+  position: absolute;
 }
 
 .white-bg{
-  position: absolute;
-  top: calc(50vh - 100px); left: calc(50vw - 200px);
-  background-color: white;
-  display: -webkit-inline-box; justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  width: 400px;
-  height: 200px;
+  text-align: center;
+  transform: translate(0%,300%)
+
 }
 </style>
