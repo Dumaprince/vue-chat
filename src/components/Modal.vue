@@ -1,8 +1,7 @@
 <template>
   <div class="black-bg" v-if="modal">
     <div class="white-bg">
-      이름을 입력하세요.
-      <br/><br/>
+      이름을 입력하세요.<br>
       <input 
         type="text"
         @input="$emit('input', $event.target.value)"

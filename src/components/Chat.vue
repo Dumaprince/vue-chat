@@ -3,7 +3,7 @@
     <header>
       <Modal @close-modal="modal = false" v-model="inputName" :modal="modal" :inputName="inputName"/>
       <span class="title">
-        <div>Trollbox ({{data.length}})</div>
+        <div>Trollbox ({{Array.from(new Set(data.name))}})</div>
       </span>
       <span>
         <a href="#">설정</a>
@@ -15,7 +15,7 @@
           <span v-for="a in data" :key="a.chat">
             <span class="short-date" v-if="isNaN(a.timestamp)">{{a.timestamp}}</span>
             <span class="short-date" v-else>{{timestamp_to_date(a.timestamp)}}</span>
-            <a class="user">{{a.name}}: </a>
+            <a href="#" v-bind:title="a.timestamp" class="user">{{a.name}}: </a>
             <span class="message">{{a.chat}}</span>
             <br/>
           </span>
@@ -61,7 +61,6 @@ export default {
         'timestamp' : this.timestamp_to_date(inputDate)
       }
       this.data.push(pushData);
-
     }
   },
 
@@ -104,14 +103,19 @@ export default {
 }
 
 .black-bg{
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  position: fixed; padding: 20px;
+  position: fixed;
+  top:0; left: 0; bottom: 0; right: 0;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .white-bg{
-  width: 100%; background: white;
-  border-radius:8px;
-  padding: 20px;
+  position: absolute;
+  top: calc(50vh - 100px); left: calc(50vw - 200px);
+  background-color: white;
+  display: -webkit-inline-box; justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 400px;
+  height: 200px;
 }
 </style>
