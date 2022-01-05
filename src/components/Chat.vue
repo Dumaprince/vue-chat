@@ -1,6 +1,6 @@
 <template>
   <div class="chat-container">
-    <Modal @close-modal="modal = false" v-model="inputName" :modal="modal" :inputName="inputName"/>
+    <NameModal @close-name-modal="nameModal = false" v-model="inputName" :nameModal="nameModal" :inputName="inputName"/>
     <header>
       <span class="title">
         <div>Trollbox ({{data.length}})</div>
@@ -29,9 +29,9 @@
   </div>
 </template>
 <script>
-import Modal from './Modal.vue'
+import NameModal from './NameModal.vue'
 export default {
-  components: { Modal },
+  components: { NameModal },
   watch: {
     immediate: true,
     handler(newValue, oldValue){
@@ -68,7 +68,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      modal: true,
+      nameModal: true,
       inputName: '',
       inputText: '',
       data:[
@@ -104,23 +104,5 @@ export default {
     right: 50%;
 }
 
-/* 위치 옮기셈 */
-.black-bg{
-  display:block;
-  width: 100%;
-  height:100%;
-  background: rgba(255, 255, 255, 0.9);
-  position: absolute;
 
-  box-sizing: border-box; /* padding 크기로 인한 크기 증가 방지*/
-  padding : 10px;
-  padding-top:20px;
-
-}
-
-.white-bg{
-  /* text-align: center;
-  transform: translate(0%,300%) */
-
-}
 </style>
