@@ -104,17 +104,23 @@ export default {
     right: 50%;
 }
 
+/* 위치 옮기셈 */
 .black-bg{
   display:block;
   width: 100%;
   height:100%;
-  background: rgba(235, 235, 235, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   position: absolute;
+
+  box-sizing: border-box; /* padding 크기로 인한 크기 증가 방지*/
+  padding : 10px;
+  padding-top:20px;
+
 }
 
 .white-bg{
-  text-align: center;
-  transform: translate(0%,300%)
+  /* text-align: center;
+  transform: translate(0%,300%) */
 
 }
 </style>
