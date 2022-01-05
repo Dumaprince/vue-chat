@@ -1,18 +1,16 @@
 <template>
-  <div class="name-container" v-if="nameModal">
+  <div class="name-container" v-if="isShowName">
     <div>Welcom to BitMEX Chat!</div>
     <div class='name-text'>To get started. choose a public username.</div>
     <input 
       class='name-input'
       type="text"
       v-model="nickName"
-      @input="$emit('input', nickName)"
-      @keyup.enter="name_chk_value();"
+      @keyup.enter="name_chk_value"
     >
     <div 
       class='name-button'
-      @input="$emit('input', nickName)"
-      @click="name_chk_value(); "
+      @click="name_chk_value"
     >Start Chatting</div>
   </div>
 </template>
@@ -21,7 +19,7 @@
 export default {
   name: 'nameModal',
   props : {
-    nameModal : Boolean,
+    isShowName : Boolean,
     inputName : String,
   },
   methods: {
@@ -31,7 +29,8 @@ export default {
         return
       }else{
         // 여기 넣는건 사실 몰라서 넣은거고 @click이나, @keyup.enter 옆에 넣으니까 안되서 포기
-        $emit('close-name-modal')
+        this.$emit('close-name-modal',this.nickName)// 닉네임전달
+        // $emit('close-name-modal')
       }
     }
   },

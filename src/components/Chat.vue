@@ -1,6 +1,6 @@
 <template>
   <div class="chat-container">
-    <NameModal @close-name-modal="nameModal = false" v-model="inputName" :nameModal="nameModal" :inputName="inputName"/>
+    <NameModal @close-name-modal="close_name_modal" v-model="inputName" :isShowName="isShowName" :inputName="inputName"/>
     <header>
       <span class="title">
         <div>Trollbox ({{data.length}})</div>
@@ -41,6 +41,11 @@ export default {
   },
 
   methods: {
+    close_name_modal(name){
+      // 닉네임받음
+      this.isShowName = false
+      this.inputName = name
+    },
     timestamp_to_date(news){
       var date = new Date(news * 1000 - 60 * 60 * 9 * 1000)
       var hour = this.correction_date(date.getHours())
@@ -68,7 +73,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      nameModal: true,
+      isShowName: true,
       inputName: '',
       inputText: '',
       data:[
