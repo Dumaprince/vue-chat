@@ -14,6 +14,7 @@
       @click="name_chk_value"
     >Start Chatting</div>
   </div>
+  
 </template>
 
 <script>
@@ -71,6 +72,7 @@ export default {
   font-size: 12px;
   text-align: center;
   color: rgb(255, 0, 0);
+  height: 15px;
 }
 .name-button{
   padding:5px 10px 5px 10px;

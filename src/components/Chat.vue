@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="chat-input-wrapper">
-        <textarea v-model="inputText" @keyup.enter="push_data()" class="chatInput form-control"></textarea>
+        <textarea v-model="inputText" @keyup.enter="push_data()" class="chatInput form-control"/>
       </div>
     </div>
   </div>
@@ -105,7 +105,7 @@ export default {
 
 .chat-container{
   position:absolute;
-  height: 329px; 
+  height: 300px; 
   width:300px;
   background: #eaecef;
   bottom:50px;
@@ -123,8 +123,8 @@ export default {
   width: 100%;
   height: 20px;
   background-color: rgb(22, 22, 22);
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: #ffffff;
 }
 
@@ -144,9 +144,10 @@ export default {
 }
 
 .chat-input-wrapper{
-  bottom: 0;
-  position: absolute;
   width: 100%;
 }
 
+.body{
+  height: calc( 100% - 40px );
+}
 </style>
