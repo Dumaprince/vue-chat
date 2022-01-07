@@ -1,13 +1,9 @@
 <template>
   <div class="chat-container">
     <NameModal @close-name-modal="close_name_modal" v-model="inputName" :isShowName="isShowName" :inputName="inputName"/>
-    <header>
-      <span class="title">
-        <div>Trollbox ({{data.length}})</div>
-      </span>
-      <span>
-        <a href="#">설정</a>
-      </span>
+    <header class="chat-title">
+      <div class="chat-title-entrant">Trollbox ({{data.length}})</div>
+      <div class="chat-title-setting">설정</div>
     </header>
     <div class="body">
       <div class="chat-widget">
@@ -99,14 +95,37 @@ export default {
 </script>
 <style>
 .chat-container{
-    position:absolute;
-    height: 329px; 
-    width:300px;
-    background: #eaecef;
-    bottom:50px;
-    left: 50px;
-    right: 50%;
+  position:absolute;
+  height: 329px; 
+  width:300px;
+  background: #eaecef;
+  bottom:50px;
+  left: 50px;
+  right: 50%;
 }
 
+.chat-section{
+  text-align: left;
+  margin-left: 10px;
+}
+
+.chat-title{
+  width: 100%;
+  height: 20px;
+  background-color: rgb(22, 22, 22);
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: #ffffff;
+}
+
+.chat-title-entrant{
+  float: left;
+  margin-left: 10px;
+}
+
+.chat-title-setting{
+  float: right;
+  margin-right: 10px;
+}
 
 </style>
