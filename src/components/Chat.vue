@@ -18,8 +18,7 @@
         </div>
       </div>
       <div class="chat-input-wrapper">
-        <textarea v-model="inputText" class="chatInput form-control"></textarea>
-        <div @keyup.enter="push_data()" class="submit-progress"></div>
+        <textarea v-model="inputText" @keyup.enter="push_data()" class="chatInput form-control"></textarea>
       </div>
     </div>
   </div>
