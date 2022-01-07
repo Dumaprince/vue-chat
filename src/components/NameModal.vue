@@ -23,8 +23,10 @@ export default {
       const target = document.getElementsByClassName('name-input-warning')
       if(nickNameLength.length > 3 && nickNameLength.length < 11){
         target[0].style.color = "black"
+        target[0].innerHTML=" "
       }else{
         target[0].style.color = "red"
+        target[0].innerHTML="4~10자 사이 입력해주세요."
       }
 
     }

@@ -1,6 +1,8 @@
 <template>
   <div class="chat-container">
-    <NameModal @close-name-modal="close_name_modal" v-model="inputName" :isShowName="isShowName" :inputName="inputName"/>
+    <transition name="chat-modal-fade">
+      <NameModal @close-name-modal="close_name_modal" v-model="inputName" v-if="isShowName" :isShowName="isShowName" :inputName="inputName"/>
+    </transition>
     <header class="chat-title">
       <div class="chat-title-entrant">Trollbox ({{data.length}})</div>
       <div class="chat-title-setting">설정</div>
@@ -93,6 +95,14 @@ export default {
 }
 </script>
 <style>
+.chat-modal-fade-leave-active {
+  transition: opacity 0.5s;
+}
+.chat-modal-fade-leave-to {
+  opacity: 0;
+}
+
+
 .chat-container{
   position:absolute;
   height: 329px; 
