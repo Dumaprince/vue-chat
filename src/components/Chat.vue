@@ -19,7 +19,7 @@
       </div>
       <div class="chat-input-wrapper">
         <textarea v-model="inputText" class="chatInput form-control"></textarea>
-        <div @click="push_data()" class="submit-progress">전송</div>
+        <div @keyup.enter="push_data()" class="submit-progress"></div>
       </div>
     </div>
   </div>
@@ -106,6 +106,7 @@ export default {
 
 .chat-section{
   text-align: left;
+  margin-top: 10px;
   margin-left: 10px;
 }
 
@@ -126,6 +127,17 @@ export default {
 .chat-title-setting{
   float: right;
   margin-right: 10px;
+}
+
+.form-control{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chat-input-wrapper{
+  bottom: 0;
+  position: absolute;
+  width: 100%;
 }
 
 </style>
