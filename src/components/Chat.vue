@@ -42,7 +42,6 @@ export default {
 
   methods: {
     close_name_modal(name){
-      // 닉네임받음
       this.isShowName = false
       this.inputName = name
     },

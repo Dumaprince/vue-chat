@@ -8,6 +8,7 @@
       v-model="nickName"
       @keyup.enter="name_chk_value"
     >
+    <div class='name-input-warning'>4~10자 사이 입력해주세요.</div>
     <div 
       class='name-button'
       @click="name_chk_value"
@@ -17,23 +18,32 @@
 
 <script>
 export default {
-  name: 'nameModal',
+  watch: {
+    nickName(nickNameLength){
+      const target = document.getElementsByClassName('name-input-warning')
+      if(nickNameLength.length > 3 && nickNameLength.length < 11){
+        target[0].style.color = "black"
+      }else{
+        target[0].style.color = "red"
+      }
+
+    }
+  },
   props : {
     isShowName : Boolean,
     inputName : String,
   },
   methods: {
     name_chk_value(){
-      if(this.nickName == ''){
-        alert("null")
-        return
+      if(this.nickName.length > 3 && this.nickName.length < 11){
+        this.$emit('close-name-modal',this.nickName)
       }else{
-        // 여기 넣는건 사실 몰라서 넣은거고 @click이나, @keyup.enter 옆에 넣으니까 안되서 포기
-        this.$emit('close-name-modal',this.nickName)// 닉네임전달
-        // $emit('close-name-modal')
+        alert("4~10자 사이 입력해주세요.")
+        return
       }
     }
   },
+  name: 'nameModal',
   data () {
     return {
       nickName: ''
@@ -52,7 +62,13 @@ export default {
 .name-input{
   box-sizing: border-box;
   width: 100%;
-  margin-bottom:20px;
+  margin-bottom:10px;
+}
+.name-input-warning{
+  margin-bottom:10px;
+  font-size: 12px;
+  text-align: center;
+  color: rgb(255, 0, 0);
 }
 .name-button{
   padding:5px 10px 5px 10px;
