@@ -28,15 +28,15 @@
 <script>
 import NameModal from './NameModal.vue'
 export default {
+  name: 'HelloWorld',
   components: { NameModal },
-  watch: {
-    immediate: true,
-    handler(newValue, oldValue){
-      if(newValue == oldValue) return
-      this.sort_date()
-    }
+  mounted(){
+    // var chatState = document.querySelector('chat-widget');
+    // console.log(chatState)
+    // chatState.addEventListener('resize', () =>{
+      // chatState.style.height = chatState.getBoundingClientRect().height
+    // })
   },
-
   methods: {
     close_name_modal(name){
       this.isShowName = false
@@ -65,21 +65,26 @@ export default {
       this.inputText = ''
     }
   },
-
-  name: 'HelloWorld',
+  watch: {
+    immediate: true,
+    handler(newValue, oldValue){
+      if(newValue == oldValue) return
+      this.sort_date()
+    }
+  },
   data () {
     return {
       isShowName: true,
       inputName: '',
       inputText: '',
       data:[
-          {
-              'name':'Duma',
+        {
+          'name':'Duma',
               'chat':'응애 나애기개발자',
               'timestamp':1641135601
           },          
           {
-              'name':'Duma',
+            'name':'Duma',
               'chat':'응애',
               'timestamp':1641137701
           },
@@ -119,6 +124,10 @@ export default {
   margin-left: 10px;
 }
 
+.chat-widget{
+  flex:1
+}
+
 .chat-title{
   width: 100%;
   height: 20px;
@@ -148,6 +157,10 @@ export default {
 }
 
 .body{
-  height: calc( 100% - 40px );
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow:auto;
 }
 </style>

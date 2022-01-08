@@ -19,19 +19,7 @@
 
 <script>
 export default {
-  watch: {
-    nickName(nickNameLength){
-      const target = document.getElementsByClassName('name-input-warning')
-      if(nickNameLength.length > 3 && nickNameLength.length < 11){
-        target[0].style.color = "black"
-        target[0].innerHTML=" "
-      }else{
-        target[0].style.color = "red"
-        target[0].innerHTML="4~10자 사이 입력해주세요."
-      }
-
-    }
-  },
+  name: 'nameModal',
   props : {
     isShowName : Boolean,
     inputName : String,
@@ -46,7 +34,19 @@ export default {
       }
     }
   },
-  name: 'nameModal',
+  watch: {
+    nickName(nickNameLength){
+      const target = document.getElementsByClassName('name-input-warning')
+      if(nickNameLength.length > 3 && nickNameLength.length < 11){
+        target[0].style.color = "black"
+        target[0].innerHTML=" "
+      }else{
+        target[0].style.color = "red"
+        target[0].innerHTML="4~10자 사이 입력해주세요."
+      }
+
+    }
+  },
   data () {
     return {
       nickName: ''
