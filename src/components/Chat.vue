@@ -27,15 +27,15 @@
 </template>
 <script>
 import NameModal from './NameModal.vue'
+import io from 'socket.io-client';
+
 export default {
   name: 'HelloWorld',
   components: { NameModal },
-  mounted(){
-    // var chatState = document.querySelector('chat-widget');
-    // console.log(chatState)
-    // chatState.addEventListener('resize', () =>{
-      // chatState.style.height = chatState.getBoundingClientRect().height
-    // })
+  created(){
+      this.socket.on('chat',(data)=>{
+        this.data.push(data)
+      })
   },
   methods: {
     close_name_modal(name){
@@ -61,9 +61,14 @@ export default {
         'chat' : this.inputText,
         'timestamp' : this.timestamp_to_date(inputDate)
       }
-      this.data.push(pushData)
+      // this.data.push(pushData)
       this.inputText = ''
-    }
+
+      this.socket.emit('send_chat', {
+        socketId: this.socket.id,
+        ...pushData
+      }) // 서버에 전송
+    },
   },
   watch: {
     immediate: true,
@@ -77,22 +82,8 @@ export default {
       isShowName: true,
       inputName: '',
       inputText: '',
+      socket : io('http://localhost:3000'),
       data:[
-        {
-          'name':'Duma',
-              'chat':'응애 나애기개발자',
-              'timestamp':1641135601
-          },          
-          {
-            'name':'Duma',
-              'chat':'응애',
-              'timestamp':1641137701
-          },
-          {
-              'name':'Minsu',
-              'chat':'응애 나는 정자개발자',
-              'timestamp':1641120601
-          },
       ]
     }
   },
