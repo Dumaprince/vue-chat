@@ -1,6 +1,8 @@
 <template>
   <div class="chat-container">
-    <NameModal @close-name-modal="close_name_modal" v-model="inputName" :isShowName="isShowName" :inputName="inputName"/>
+    <transition name="chat-modal-fade">
+      <NameModal @close-name-modal="close_name_modal" v-model="inputName" v-if="isShowName" :isShowName="isShowName" :inputName="inputName"/>
+    </transition>
     <header class="chat-title">
       <div class="chat-title-entrant">Trollbox ({{data.length}})</div>
       <div class="chat-title-setting">설정</div>
@@ -18,7 +20,7 @@
         </div>
       </div>
       <div class="chat-input-wrapper">
-        <textarea v-model="inputText" @keyup.enter="push_data()" class="chatInput form-control"></textarea>
+        <textarea v-model="inputText" @keyup.enter="push_data()" class="chatInput form-control"/>
       </div>
     </div>
   </div>
@@ -26,15 +28,15 @@
 <script>
 import NameModal from './NameModal.vue'
 export default {
+  name: 'HelloWorld',
   components: { NameModal },
-  watch: {
-    immediate: true,
-    handler(newValue, oldValue){
-      if(newValue == oldValue) return
-      this.sort_date()
-    }
+  mounted(){
+    // var chatState = document.querySelector('chat-widget');
+    // console.log(chatState)
+    // chatState.addEventListener('resize', () =>{
+      // chatState.style.height = chatState.getBoundingClientRect().height
+    // })
   },
-
   methods: {
     close_name_modal(name){
       this.isShowName = false
@@ -63,21 +65,26 @@ export default {
       this.inputText = ''
     }
   },
-
-  name: 'HelloWorld',
+  watch: {
+    immediate: true,
+    handler(newValue, oldValue){
+      if(newValue == oldValue) return
+      this.sort_date()
+    }
+  },
   data () {
     return {
       isShowName: true,
       inputName: '',
       inputText: '',
       data:[
-          {
-              'name':'Duma',
+        {
+          'name':'Duma',
               'chat':'응애 나애기개발자',
               'timestamp':1641135601
           },          
           {
-              'name':'Duma',
+            'name':'Duma',
               'chat':'응애',
               'timestamp':1641137701
           },
@@ -93,9 +100,17 @@ export default {
 }
 </script>
 <style>
+.chat-modal-fade-leave-active {
+  transition: opacity 0.5s;
+}
+.chat-modal-fade-leave-to {
+  opacity: 0;
+}
+
+
 .chat-container{
   position:absolute;
-  height: 329px; 
+  height: 300px; 
   width:300px;
   background: #eaecef;
   bottom:50px;
@@ -109,12 +124,16 @@ export default {
   margin-left: 10px;
 }
 
+.chat-widget{
+  flex:1
+}
+
 .chat-title{
   width: 100%;
   height: 20px;
   background-color: rgb(22, 22, 22);
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: #ffffff;
 }
 
@@ -134,9 +153,14 @@ export default {
 }
 
 .chat-input-wrapper{
-  bottom: 0;
-  position: absolute;
   width: 100%;
 }
 
+.body{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow:auto;
+}
 </style>
